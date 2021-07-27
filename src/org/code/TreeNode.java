@@ -18,4 +18,7 @@ public class TreeNode {
 		this.right = right;
 	}
 	
+	int getVal() {
+		return this.val;
+	}
 }
