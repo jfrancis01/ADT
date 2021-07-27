@@ -1,16 +1,21 @@
 package org.code;
 
 public class TreeNode {
+	public TreeNode left = null;
+	public TreeNode right = null;
+	public int val;
 	
-	TreeNode left;
-	TreeNode right;
-	private int val;
+	TreeNode(){
+	}
 	
-	public TreeNode(int val) {
+	TreeNode(int val){
 		this.val = val;
 	}
 	
-	public int getVal() {
-		return this.val;
+	TreeNode(int val, TreeNode left, TreeNode right){
+		this.val = val;
+		this.left = left;
+		this.right = right;
 	}
+	
 }
