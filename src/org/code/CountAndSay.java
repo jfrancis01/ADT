@@ -5,35 +5,37 @@ import java.util.LinkedHashMap;
 public class CountAndSay {
 	
 	public static void main(String argv[]) {
-		int n = 2;
+		int n = 5;
 		CountAndSay cs = new CountAndSay();
 		System.out.println(cs.countAndSay(n));
 	}
 	
 	public String countAndSay(int n) {
 		
-		String start = "55555";
+		String start = "1";
 		if(n == 1) return start;
 		StringBuilder sb = new StringBuilder("");
-		int count = 0;
-		int i = 0;
-		int j = i;
-		while(i <= start.length() - 1) {
-			j = i;
-			while(j <= start.length() - 1) {
-				if(start.charAt(i) == start.charAt(j)) {
-					count++;
-					j++;
+		for(int j = 2; j <= n ; j++) {
+			char c = start.charAt(0);
+			int count = 1;
+			for(int i = 1; i < start.length(); i ++) {
+				if(c != start.charAt(i)) {
+					sb.append(count);
+					sb.append(c);
+					count = 1;
+					c = start.charAt(i);
 				}
 				else {
-					i = j;
-					sb.append(count);
-					sb.append(start.charAt(i));
-					break;
+					count++;
 				}
 			}
+			//don't forget to append the last character, if they are all the same
+			//this will work as well.
+			sb.append(count);
+			sb.append(c);
+			start = sb.toString();
+			sb.setLength(0);
 		}
-		//after it exits this loop add the last character to the end
-		return sb.toString();
+		return start;
 	}
 }
