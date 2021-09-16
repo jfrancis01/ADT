@@ -6,7 +6,7 @@ public class UniquePaths {
 
 	public static void main(String[] args) {
 		UniquePaths up = new UniquePaths();
-		System.out.print("Ways: " + up.uniquePaths(3, 2));
+		System.out.print("Ways: " + up.uniquePaths(3, 3));
 	}
 
 	public int uniquePaths(int m, int n) {
