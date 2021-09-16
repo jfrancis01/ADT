@@ -13,8 +13,8 @@ public class MissingRanges {
 
 	public static void main(String[] args) {
 		MissingRanges mr = new MissingRanges();
-		int[] nums = {0,1,3,50, 75};
-		List<String> ans = mr.findMissingRanges(nums, 0, 99);
+		int[] nums = {10000000};
+		List<String> ans = mr.findMissingRanges(nums, 0, 10000000);
 		for(String s : ans) {
 			System.out.print(s + ", ");
 		}
