@@ -2,7 +2,7 @@ package org.code;
 
 public class UniquePaths {
 	//This is a test
-	public static int count = 0;
+	public int count = 0;
 
 	public static void main(String[] args) {
 		UniquePaths up = new UniquePaths();
