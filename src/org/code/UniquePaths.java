@@ -6,26 +6,34 @@ public class UniquePaths {
 
 	public static void main(String[] args) {
 		UniquePaths up = new UniquePaths();
-		System.out.print("Ways: " + up.uniquePaths(3, 3));
+		System.out.print("Ways: " + up.uniquePaths(3, 7));
 	}
 
 	public int uniquePaths(int m, int n) {
 		//initialize the board
-		int[][]board = new int[m][n]; // initalize the board
+		int[][]board = new int[m + 1][n + 1]; // initalize the board
+		for(int i = 0; i < m; i++) {
+			for(int j = 0; j < n; j++) {
+				board[i][j] = -1;
+			}
+		}
 		int si = 0, sj = 0;// initialize start oordinates
-		move(board, si, sj, m - 1, n -1);
-		return count;
+		return move(board, si, sj, m - 1, n -1);
 	}
 	
-	public void move(int[][] board, int row, int col, int maxRow, int maxCol) {
+	public int move(int[][] board, int row, int col, int maxRow, int maxCol) {
+		
 		if(row > maxRow || col> maxCol) {
-			return;
+			return 0;
 		}
 		if(row == maxRow && col == maxCol) {
-			count++;
+			return 1;
 		}
-		move(board, row + 1, col, maxRow, maxCol);
-		move(board, row, col + 1, maxRow, maxCol);
+		if(board[row][col] != -1) {
+			return board[row][col];
+		}
+		board[row][col] = move(board, row + 1, col, maxRow, maxCol) + move(board, row, col + 1, maxRow, maxCol);
+		return board[row][col];
 	}
 
 }
