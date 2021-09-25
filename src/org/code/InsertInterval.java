@@ -42,6 +42,7 @@ public class InsertInterval {
 			}
 
 		}
+		//this is if the initial intervals are empty
 		if (!inserted) {
 			inters.add(newInterval);
 		}
