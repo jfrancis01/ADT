@@ -15,19 +15,15 @@ public class WordBreakAgain {
 		wordDict.add("sand");
 		wordDict.add("and");
 		wordDict.add("cat");
-		wba.wordBreak(s, wordDict, start);
+		System.out.println(wba.wordBreak(s, wordDict, start));
 	}
 
 	public boolean wordBreak(String s, List<String> wordDict, int start) {
-		if(s.length() == 0 || s.isEmpty()) {
+		if(start == s.length()) {
 			return true;
 		}
-		for(int i = start; i < s.length(); i++) {
-			String word = s.substring(0, i + 1);
-			if(exists(word, wordDict)) {
-				boolean with = wordBreak(s.substring(i + 1), wordDict, 0);
-				boolean without = wordBreak(s, wordDict, i + 1);
-			}
+		for(int end = start; end < s.length(); end++) {
+			if(exists(s.substring(start, end), wordDict) && wordBreak (s, wordDict, end + 1));
 		}
 		return false;
 	}
