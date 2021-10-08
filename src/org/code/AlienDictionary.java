@@ -28,6 +28,7 @@ public class AlienDictionary {
 		for (String word : words) {
             for (char c : word.toCharArray()) {
                 topoGraph.put(c, new HashSet<>());
+                inDegree.put(c, 0);
             }
         }
 		
