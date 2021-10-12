@@ -9,7 +9,7 @@ public class AlienDictionary {
 
 	public static void main(String[] args) {
 		AlienDictionary ad = new AlienDictionary();
-		String[] words = { "ab", "adc" };
+		String[] words = { "ac", "ab", "zc", "zb" };
 		System.out.println(ad.alienOrder(words));
 	}
 
@@ -60,8 +60,6 @@ public class AlienDictionary {
 						topoGraph.put(c1, vals);
 					}
 				}
-				//inDegree.putIfAbsent(c1, 0);
-				//inDegree.putIfAbsent(c2, 0);
 				start++;
 			}
 		}
