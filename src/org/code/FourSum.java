@@ -12,7 +12,7 @@ public class FourSum {
 
 	public List<List<Integer>> fourSum(int[] nums, int target) {
 		ArrayList<Integer> nodups = new ArrayList<Integer>();
-		//Arrays.sort(nums);
+		Arrays.sort(nums);
 		for (int i = 0; i < nums.length; i++) {
 			nodups.add(nums[i]);
 		}
@@ -44,7 +44,7 @@ public class FourSum {
     }
 
 	public static void main(String[] args) {
-		int[] nums = {2,2,2,2,2};//{ 1, 0, -1, 0, -2, 2 };
+		int[] nums = {2,2,2,2,2};
 		FourSum fs = new FourSum();
 		fs.fourSum(nums, 8);
 	}
