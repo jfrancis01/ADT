@@ -7,46 +7,61 @@ import java.util.List;
 
 public class FourSum {
 
-	List<List<Integer>> ans = null;
-	HashSet<List<Integer>> set = new HashSet<List<Integer>>();
+	List<List<Integer>> ans = new ArrayList<List<Integer>>();
 
 	public List<List<Integer>> fourSum(int[] nums, int target) {
-		ArrayList<Integer> nodups = new ArrayList<Integer>();
 		Arrays.sort(nums);
-		for (int i = 0; i < nums.length; i++) {
-			nodups.add(nums[i]);
+		for(int i = 0; i < nums.length; i++) {
+			for(int j = i + 1; j < nums.length; j++) {
+				int target_2 = target - (nums[i] + nums[j]);
+				//initialize two pointers
+				int front = j + 1;
+				int end = nums.length - 1;
+				
+				while(front < end) {
+					if(nums[front] + nums[end] == target_2) {
+						front++;
+						end--;
+						ArrayList<Integer> combo = new ArrayList<Integer>();
+						combo.add(nums[i]);
+						combo.add(nums[j]);
+						combo.add(nums[front]);
+						combo.add(nums[end]);
+						ans.add(combo);
+						while(front < end  && nums[front] == nums[front -1]) {
+							front++;
+						}
+					}
+					else if (nums[front] + nums[end] < target_2) {
+						front++;
+					}
+					else {
+						end--;
+					}
+				}
+				while(j + 1 < nums.length && nums[j] == nums[j + 1]) {
+					j++;
+				}
+			}
+			while(i + 1< nums.length && nums[i] == nums[i + 1]) {
+				i++;
+			}
 		}
-		findCombos(0, target, new ArrayList<Integer>(), nodups);
-		ans = new ArrayList(set);
-		for(int i = 0; i < ans.size(); i++) {
-			System.out.println(ans.get(i));
-		}
+		printAnswers();
 		return ans;
 	}
 
-	private void findCombos(int start, int target, 
-			ArrayList<Integer> combo, ArrayList<Integer> nodups){
-
-        if(target == 0 && combo.size() == 4) {
-        	set.add((List<Integer>) combo.clone());
-        	return;
-        }
-		if(start >= nodups.size()) {
-			return;
-		}
-        for(int i = start; i <nodups.size(); i++ ) {
-        	//if(nodups.get(i) <= target) {
-        		combo.add(nodups.get(i));
-        		findCombos(i + 1, target - nodups.get(i), combo, nodups);
-        		combo.remove(combo.size() - 1);
-        	//}
-        }
-    }
 
 	public static void main(String[] args) {
 		int[] nums = {2,2,2,2,2};
 		FourSum fs = new FourSum();
 		fs.fourSum(nums, 8);
+	}
+	
+	private void printAnswers() {
+		for(int i = 0; i < ans.size(); i++) {
+			System.out.println(ans.get(i));
+		}
 	}
 
 }
