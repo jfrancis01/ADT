@@ -5,10 +5,10 @@ import java.util.Arrays;
 public class FourSumII {
 
 	public static void main(String[] args) {
-		int[] num1 = { 1, 2 };
-		int[] nums2 = { -2, -1 };
-		int[] nums3 = { -1, 2 };
-		int[] nums4 = { 0, 2 };
+		int[] num1 = { -1, -1 };
+		int[] nums2 = { -1, 1 };
+		int[] nums3 = { -1, 1 };
+		int[] nums4 = { 1, -1 };
 		FourSumII  fsumII = new FourSumII ();
 		System.out.println("# of Tupples: " + fsumII.fourSumCount(nums4, nums2, nums3, nums4));
 	}
