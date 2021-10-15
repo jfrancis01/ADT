@@ -9,7 +9,7 @@ public class FourSumII {
 		int[] nums2 = { -1, 1 };
 		int[] nums3 = { -1, 1 };
 		int[] nums4 = { 1, -1 };
-		FourSumII  fsumII = new FourSumII ();
+		FourSumII fsumII = new FourSumII ();
 		System.out.println("# of Tupples: " + fsumII.fourSumCount(nums4, nums2, nums3, nums4));
 	}
 
