@@ -19,12 +19,12 @@ public class LongestContinuousSubarrayWithAbsoluteDiff {
 		int[] nums = {10, 1,2,4,7,2};
 		int limit = 5;
 		LongestContinuousSubarrayWithAbsoluteDiff obj = new LongestContinuousSubarrayWithAbsoluteDiff();
-		System.out.println(obj.longestSubarray(nums, 0));
+		System.out.println(obj.longestSubarray(nums, 5));
 		
 	}
 	
 	public int longestSubarray(int[] nums, int limit) {
-		int ans = Integer.MIN_VALUE;
+		int ans = 1;
 		int l = 0;
 		Deque<Integer> max_q = new ArrayDeque<Integer>();
 		Deque<Integer> min_q = new ArrayDeque<Integer>();
@@ -35,19 +35,19 @@ public class LongestContinuousSubarrayWithAbsoluteDiff {
 			if(!max_q.isEmpty() && nums[index] >= nums[max_q.getLast()]) {
 				max_q.removeLast();
 			}
-			max_q.push(index);
+			max_q.addLast(index);
 			
 			//repeat the same thing to get the minimum
 			
-			if(!min_q.isEmpty() && nums[index] <= nums[max_q.getLast()]) {
+			if(!min_q.isEmpty() && nums[index] <= nums[min_q.getLast()]) {
 				min_q.removeLast();
 			}
-			min_q.push(index);
+			min_q.addLast(index);
 			
 			//find the absolute difference
-			while(Math.abs(max_q.getFirst() - min_q.getFirst()) > limit) {
-				if (max_q.peekFirst() == nums[l]) max_q.pollFirst();
-				if (min_q.peekFirst() == nums[l]) min_q.pollFirst();
+			while(nums[max_q.getFirst()] - nums[min_q.getFirst()] > limit) {
+				if (nums[max_q.peekFirst()] == nums[l]) max_q.pollFirst();
+				if (nums[min_q.peekFirst()] == nums[l]) min_q.pollFirst();
 				l++;
 			}
 			ans = Math.max(ans, index-l + 1);
