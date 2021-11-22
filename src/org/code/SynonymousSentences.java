@@ -33,33 +33,32 @@ public class SynonymousSentences {
 
 	private void generateSentencesHelper(int start, List<List<String>> synonyms, String text, List<String> combo) {
 		if (start >= synonyms.size()) {
-			if(!combo.contains(text)) {
+			if (!combo.contains(text)) {
 				combo.add(text);
 			}
 			return;
 		}
+		String[] words = text.split(" ");
+		String newText  = "";
 		for (int i = 0; i < 2; i++) {
 			if (i == 0) {
-				Pattern word = Pattern.compile("\\b" + synonyms.get(start).get(0) + "\\b");
-				Matcher match = word.matcher(text);
-				String synonym = synonyms.get(start).get(1);
-				if (match.find()) {// if the word is present
-					generateSentencesHelper(start + 1, synonyms,
-							text.substring(0, match.start()) + synonym + text.substring(match.end()), combo);
+				for(int j  = 0; j < words.length; j++) {
+					if(words[j].equals(synonyms.get(start).get(0))) {
+						words[j] = synonyms.get(start).get(1);
+					}
 				}
-				// or don't take the first set
-				generateSentencesHelper(start + 1, synonyms, text, combo);
-			}
-			else {
-				Pattern word = Pattern.compile("\\b" + synonyms.get(start).get(1) + "\\b");
-				Matcher match = word.matcher(text);
-				String synonym = synonyms.get(start).get(0);
-				if (match.find()) {// if the word is present
-					generateSentencesHelper(start + 1, synonyms,
-							text.substring(0, match.start()) + synonym + text.substring(match.end()), combo);
+				newText = String.join(" ", words);
+				//take it
+				generateSentencesHelper(start + 1, synonyms, newText, combo);
+			} else {
+				for(int j  = 0; j < words.length; j++) {
+					if(words[j].equals(synonyms.get(start).get(1))) {
+						words[j] = synonyms.get(start).get(0);
+					}
 				}
-				// or don't take the first set
-				generateSentencesHelper(start + 1, synonyms, text, combo);
+				newText = String.join(" ", words);
+				//take it
+				generateSentencesHelper(start + 1, synonyms, newText, combo);
 			}
 
 		}
