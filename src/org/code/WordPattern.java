@@ -1,5 +1,7 @@
 package org.code;
 
+import java.util.HashMap;
+
 public class WordPattern {
 
 	public static void main(String[] args) {
