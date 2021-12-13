@@ -1,57 +1,72 @@
 package org.code;
 
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class OpenLock {
 	
-	int steps = Integer.MAX_VALUE;
-	HashSet<String> map = new HashSet<String>();
+	HashSet<String> visited = new HashSet<String>();
+	HashSet<String>  deadends = new HashSet<String>();
+	
     public int openLock(String[] deadends, String target) {
         int index = 0;
-        StringBuilder sb = new StringBuilder("0000");
-        openLockHelper(deadends, target, index, sb, 0, map);
-        return steps;
-    }
-    public void openLockHelper(String[] deadends, String target, int index, StringBuilder sb, int count, HashSet<String> map){
-        if(isDeadEnd(sb.toString(), deadends)) {
-        	 return;
+        for(String deadend : deadends) {
+        	this.deadends.add(deadend);
         }
-        if(sb.toString().equals(target)) {
-        	steps = Math.min(count, steps);
-        	return;
-        }
+        String sb = new String("0000");
+        if(this.deadends.contains(sb)) return -1;
+        return openLockHelper(deadends, target, index, sb, 0);
         
-        for(int i = index; i < sb.length(); i++) {
-        	char c = sb.charAt(i);
-        	char d = c;
-        	if(d == '9') {
-        		d = '0';
-        	}else {
-        		++d;
-        	}
-        	sb.replace(i, i + 1, d + "");
-        	if(map.contains(sb.toString())) {
-        		return;
-        	}
-        	map.add(sb.toString());
-        	openLockHelper(deadends, target, i, sb, ++count, map);
-        	sb.replace(i, i + 1, c + "");
-        }
+    }
+    public int openLockHelper(String[] deadends, String target, int index, String sb, int count){
+    	Queue<String> q = new LinkedList<String>();
+    	q.add(sb);
+    	this.deadends.add(sb);
+    	int level = 0;
+    	while(!q.isEmpty()) {
+    		int size = q.size();
+    		while(size > 0) {
+    			String temp = q.poll();
+    			if(temp.equals(target)) return level;
+    			for(int i = 0; i < temp.length(); i++) {
+    				char c = temp.charAt(i);
+    				char upC = c;
+    				if(upC == '9') {
+    					upC = '0';
+    				}
+    				else {
+    					++upC;
+    				}
+    				String upString = temp.substring(0, i) + upC + temp.substring(i + 1);
+    				if(!this.deadends.contains(upString)) {
+    					q.add(upString);
+    					this.deadends.add(upString);
+    				}
+    				char downC = c;
+    				if(downC == '0') {
+    					downC = '9';
+    				}
+    				else {
+    					--downC;
+    				}
+    				String downString = temp.substring(0, i) + downC + temp.substring(i + 1);
+    				if(!this.deadends.contains(downString)) {
+    					q.add(downString);
+    					this.deadends.add(downString);
+    				}
+    			}
+    			size--;
+    		}
+    		++level;
+    	}
+    	return -1;
     } 
 
 	public static void main(String[] args) {
         String[] deadends = {"0201","0101","0102","1212","2002"};
         OpenLock op = new OpenLock();
         System.out.println(op.openLock(deadends, "0202"));
-	}
-	
-	private boolean isDeadEnd(String combo, String[] deadends) {
-		for(String deadend : deadends) {
-			if(combo.equals(deadend)) {
-				return true;
-			}
-		}
-		return false;
 	}
 
 }
