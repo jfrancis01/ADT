@@ -18,21 +18,21 @@ public class LongestSubstringWithoutRepeating {
 			char c = s.charAt(right);
 			if (!map.containsKey(c)) {
 				map.put(c, right);
+				max = Math.max(max, (right - left) + 1);
 			} else {
 				int index = map.get(c);
-				left = map.get(c);
+				left = Math.max(left, index + 1);
 				map.put(c, right);
-				left = index + 1;
 				max = Math.max(max, (right - left) + 1);
 			}
 			right++;
 		}
-		return max = Math.max(max, (right - left) + 1);
+		return max;
 	}
 
 	public static void main(String[] args) {
 		LongestSubstringWithoutRepeating lswrc = new LongestSubstringWithoutRepeating();
-		System.out.println(lswrc.lengthOfLongestSubstring("au"));
+		System.out.println(lswrc.lengthOfLongestSubstring("abba"));
 	}
 
 }
