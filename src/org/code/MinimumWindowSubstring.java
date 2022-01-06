@@ -6,7 +6,7 @@ public class MinimumWindowSubstring {
 
 	public static void main(String[] args) {
 		MinimumWindowSubstring mws = new MinimumWindowSubstring();
-		System.out.println(mws.minWindow("ADOBECODEBANC", "ABC"));
+		System.out.println(mws.minWindow("bdab", "ab"));
 	}
 
 	public String minWindow(String s, String t) {
@@ -26,7 +26,9 @@ public class MinimumWindowSubstring {
 		}
 
 		int start = 0;
-		for (int end = start; end < s.length();) {
+		int end = 0;
+		while ( start <s.length() && end < s.length() ) {
+			//start = end;
 			boolean tooMany = false;
 			while (!window.equals(omap) && end < s.length()) {
 				char ch = s.charAt(end);
@@ -47,9 +49,8 @@ public class MinimumWindowSubstring {
 				}
 				end++;
 			}
-
-			if (!tooMany) {
-				int tempStart = start;
+			int tempStart = start;
+			if (!tooMany && window.equals(omap)) {
 				while (start < s.length() && !omap.containsKey(s.charAt(start))) {
 					++start;
 				}
@@ -63,7 +64,9 @@ public class MinimumWindowSubstring {
 						ans = str;
 					}
 				}
-				start = end-1;
+				start = tempStart;
+				start++;
+				end = start;
 				//System.out.println(str);
 			}
 			
