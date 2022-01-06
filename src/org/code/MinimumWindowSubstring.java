@@ -7,7 +7,7 @@ public class MinimumWindowSubstring {
 
 	public static void main(String[] args) {
 		MinimumWindowSubstring mws = new MinimumWindowSubstring();
-		System.out.println(mws.minWindow("aaaaaaaaaaaabbbbbcdd", "abcdd"));
+		System.out.println(mws.minWindow("bdab", "ab"));
 	}
 
 	public String minWindow(String s, String t) {
@@ -30,6 +30,7 @@ public class MinimumWindowSubstring {
 		int start = 0;
 		int end = 0;
 		while (start < s.length() && end < s.length()) {
+			end = start;
 			while (!areMapsEqual(omap, window) && end < s.length()) {
 				char ch = s.charAt(end);
 				if (omap.containsKey(ch)) {
@@ -59,6 +60,7 @@ public class MinimumWindowSubstring {
 				}
 				String str = null;
 				str = s.substring(start, end);
+				System.out.println(str);
 				if (ans.isEmpty()) {
 					ans = str;
 				} else {
@@ -66,10 +68,9 @@ public class MinimumWindowSubstring {
 						ans = str;
 					}
 				}
-				start = tempStart;
-				start++;
-				end = start;
-				//System.out.println(str);
+				if (start == tempStart) {
+					start++;
+				}
 			}
 
 			window.clear();
