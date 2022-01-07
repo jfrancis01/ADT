@@ -50,7 +50,7 @@ public class MinimumWindowSubstring {
 						++start;
 					} else if (omap.containsKey(c)) {
 						int count = window.get(c);
-						if (!(count - 1 >= omap.get(c))) {
+						if (!(count - 1 >= Integer.valueOf(omap.get(c)))) {
 							break;
 						} else {
 							window.put(c, window.get(c) - 1);
