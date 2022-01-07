@@ -6,7 +6,7 @@ import java.util.Set;
 public class MinimumWindowSubstring {
 
 	public static void main(String[] args) {
-		MinimumWindowSubstring mws = new MinimumWindowSubstring();
+		MinimumWindowSubstringSolution mws = new MinimumWindowSubstringSolution();
 		System.out.println(mws.minWindow("bdab", "ab"));
 	}
 
@@ -77,7 +77,12 @@ public class MinimumWindowSubstring {
 		}
 		return ans;
 	}
-
+	/**
+	 * This seems to the probelm. There shouldn't be a need to go through the hashes 
+	 * @param omap
+	 * @param window
+	 * @return
+	 */
 	private boolean areMapsEqual(HashMap<Character, Integer> omap, HashMap<Character, Integer> window) {
 		Set<Character> omapKeys = omap.keySet();
 		Set<Character> windowKeys = window.keySet();
