@@ -12,8 +12,6 @@ public class KokoEatingBananas {
 	}
 
 	public int minEatingSpeed(int[] piles, int h) {
-		// first we sort the array
-		Arrays.sort(piles);
 		int ans = binarySearch(piles, 1, piles[piles.length - 1], h);
 		return ans;
 	}
