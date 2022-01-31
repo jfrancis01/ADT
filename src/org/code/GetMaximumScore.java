@@ -65,10 +65,10 @@ public class GetMaximumScore {
 		//Go through the indegree's map and see which node has an indegree of 0
 		//and add ALL of them to the queue
 		class pqObj {
-			int curr_sum = 0;
+			long curr_sum = 0;
 			int node = 0;
 			
-			public pqObj (int curr_sum, int node) {
+			public pqObj (long curr_sum, int node) {
 				this.curr_sum = curr_sum;
 				this.node = node;
 			}
