@@ -10,7 +10,10 @@ public class MonotonicStack {
 	public static void main(String[] args) {
 		int[] ints = {3,1,6,2,5,4};
 		MonotonicStack ms = new MonotonicStack();
-		List<Integer> nums = Arrays.stream(ints).boxed().toList();
+		List<Integer> nums = new ArrayList<Integer>();
+		for(int val : ints) {
+			nums.add(val);
+		}
 		ms.monoStack(nums);
 	}
 	
