@@ -13,10 +13,17 @@ public class SplitArray {
 	public int splitArray(int[] nums, int m) {
 		int start  = 0;
 		int n = nums.length;
-		return helper(start, nums, m, n);
+		int[][] cache = new int[n + 1][ m + 1];
+		for(int i  = 0; i < cache.length; i++) {
+			for(int j  = 0; j < cache[0].length; j ++) {
+				cache[i][j] = -1;
+			}
+		}
+		cache[0][0] = 0;
+		return helper(start, nums, m, n, cache);
 	}
 	
-	private int helper(int start, int[] nums, int m, int n) {
+	private int helper(int start, int[] nums, int m, int n, int[][]cache) {
 		//base cases
 		if(m == 0 &&  start >= n) {
 			return 0;
@@ -24,15 +31,19 @@ public class SplitArray {
 		if(m == 0 || start >= n) {
 			return Integer.MAX_VALUE;
 		}
+		if(cache[start][m] != -1) {
+			return cache[start][m];
+		}
 		int max = Integer.MIN_VALUE;
 		int ans  = Integer.MAX_VALUE;
 		int currentSum = 0;
 		for(int i = start; i < n; i++ ) {
 			currentSum+= nums[i];
-			int rest = helper(i + 1, nums, m - 1, n);
+			int rest = helper(i + 1, nums, m - 1, n, cache);
 			max = Math.max(currentSum, rest);
 			ans = Math.min(max, ans);
 		}
+		cache[start][m] = ans;
 		return ans;
 	}
 	
