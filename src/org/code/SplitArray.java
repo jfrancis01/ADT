@@ -17,6 +17,7 @@ public class SplitArray {
 	}
 	
 	private int helper(int start, int[] nums, int m, int n) {
+		//base cases
 		if(m == 0 &&  start >= n) {
 			return 0;
 		}
