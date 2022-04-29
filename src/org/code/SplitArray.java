@@ -3,7 +3,7 @@ package org.code;
 public class SplitArray {
 
 	public static void main(String[] args) {
-		int[] nums = {7,2,5,10,8};
+		int[] nums = {1,2,3,4,5};
 		int m = 2;
 		SplitArray sa = new SplitArray();
 		System.out.println(sa.splitArray(nums, m));
