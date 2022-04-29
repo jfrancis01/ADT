@@ -17,21 +17,22 @@ public class SplitArray {
 	}
 	
 	private int helper(int start, int[] nums, int m, int n) {
-		if(start >= n) {
+		if(m == 0 &&  start >= n) {
+			return 0;
+		}
+		if(m == 0 || start >= n) {
 			return Integer.MAX_VALUE;
 		}
-		if( m == 1) {
-			return sum(start, nums, n);
-		}
-		int max = Integer.MAX_VALUE;
+		int max = Integer.MIN_VALUE;
 		int ans  = Integer.MAX_VALUE;
 		int currentSum = 0;
 		for(int i = start; i < n; i++ ) {
 			currentSum+= nums[i];
-			int rest = helper(start + 1, nums, m - 1, n);
+			int rest = helper(i + 1, nums, m - 1, n);
 			max = Math.max(currentSum, rest);
+			ans = Math.min(max, ans);
 		}
-		return Math.min(max, ans);
+		return ans;
 	}
 	
 	private int sum(int start, int[] nums, int n) {
