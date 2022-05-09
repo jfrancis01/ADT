@@ -1,58 +1,66 @@
 package org.code;
 
 import java.util.HashMap;
+import java.util.Map;
 
-public class MapSum {
+class MapSum {
 
-	private HashMap<Character, MapSum> children = null;
-	private boolean isWord = false;
-	private int value = 0;
+	class TrieNode {
+		Map<Character, TrieNode> children;
+		boolean isWord;
+		int value;
 
+		public TrieNode() {
+			children = new HashMap<Character, TrieNode>();
+			isWord = false;
+			value = 0;
+		}
+	}
+
+	TrieNode root;
+
+	/** Initialize your data structure here. */
 	public MapSum() {
-		children = new HashMap<Character, MapSum>();
+		root = new TrieNode();
 	}
 
-	public void insert(String word, int val) {
-		insertHelper(word, 0, this, children, val);
-	}
-
-	private void insertHelper(String word, int index, MapSum node, HashMap<Character, MapSum> map, int val) {
-		if (index >= word.length()) {
-			node.isWord = true;
-			node.value = val;
-			return;
+	public void insert(String key, int val) {
+		TrieNode curr = root;
+		for (char c : key.toCharArray()) {
+			TrieNode next = curr.children.get(c);
+			if (next == null) {
+				next = new TrieNode();
+				curr.children.put(c, next);
+			}
+			curr = next;
 		}
-		MapSum child = null;
-		if (!map.containsKey(word.charAt(index))) {
-			child = new MapSum();
-			map.put(word.charAt(index), child);
-			insertHelper(word, index + 1, child, child.children, val);
-		} else {
-			child = map.get(word.charAt(index));
-			insertHelper(word, index + 1, child, child.children, val);
-		}
+		curr.isWord = true;
+		curr.value = val;
 	}
 
 	public int sum(String prefix) {
-		int sum = 0;
-		int index = 0;
-		return sumHelper(prefix, index, sum, this);
-	}
-
-	public int sumHelper(String prefix, int index, int sum, MapSum node) {
-		if (index >= prefix.length()) {
-			return 0;
+		TrieNode curr = root;
+		for (char c : prefix.toCharArray()) {
+			TrieNode next = curr.children.get(c);
+			if (next == null) {
+				return 0;
+			}
+			curr = next;
 		}
-		if (node.children.isEmpty())
-			return 0;
-		if (!node.children.containsKey(prefix.charAt(index)))
-			return 0;
-		sum += node.value + sumHelper(prefix, index + 1, sum, node.children.get(prefix.charAt(index)));
-		return sum;
+
+		return dfs(curr);
 	}
 
-	/**
-	 * Your MapSum object will be instantiated and called as such: MapSum obj = new
-	 * MapSum(); obj.insert(key,val); int param_2 = obj.sum(prefix);
-	 */
+	private int dfs(TrieNode root) {
+		int sum = 0;
+		for (char c : root.children.keySet()) {
+			sum += dfs(root.children.get(c));
+		}
+		return sum + root.value;
+	}
 }
+
+/**
+ * Your MapSum object will be instantiated and called as such: MapSum obj = new
+ * MapSum(); obj.insert(key,val); int param_2 = obj.sum(prefix);
+ */
