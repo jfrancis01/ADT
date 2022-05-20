@@ -6,39 +6,43 @@ import java.util.HashMap;
 public class BulllsAndCows {
 
 	public static void main(String[] args) {
-		String secret = "1807";
-		String guess = "7810";
+		String secret = "111112";
+		String guess = "111121";
 		BulllsAndCows bac = new BulllsAndCows();
 		System.out.println(bac.getHint(secret, guess));
 	}
 
 	public String getHint(String secret, String guess) {
-		HashMap<Integer, ArrayList<Integer>> secretMap = new HashMap<Integer, ArrayList<Integer>>();
-		for(int i  = 0; i < secret.length(); i++) {
-			int n = Character.getNumericValue((secret.charAt(i)));
-			ArrayList<Integer> pos = null;
-			if(!secretMap.containsKey(n)) {
-				pos = new ArrayList<Integer>();
-			}
-			else {
-				pos = secretMap.get(n);
-			}
-			pos.add(i);
-			secretMap.put(n, pos);
-			int bulls  = 0;
-			int cows  = 0;
-			for(int j  = 0; j < guess.length(); j++) {
-				n = Character.getNumericValue((guess.charAt(i)));
-				if(secretMap.containsKey(n)) {
-					pos = secretMap.get(n);
-					for(int k = 0; k < pos.size(); k++) {
-						if(pos.get(k).intValue() == j) {
-							bulls++;
-						}
-					}
-				}
-			}	
-		}
+		 HashMap<Character, Integer> h = new HashMap();
+	        for (char s : secret.toCharArray()) {
+	            h.put(s, h.getOrDefault(s, 0) + 1);
+	        }
+	            
+	        int bulls = 0, cows = 0;
+	        int n = guess.length();
+	        for (int idx = 0; idx < n; ++idx) {
+	            char ch = guess.charAt(idx);
+	            if (h.containsKey(ch)) {
+	                // corresponding characters match
+	                if (ch == secret.charAt(idx)) {
+	                    // update the bulls
+	                    bulls++;
+	                    // update the cows 
+	                    // if all ch characters from secret 
+	                    // were used up
+	                    if (h.get(ch) <= 0)
+	                        cows--;    
+	                // corresponding characters don't match
+	                } else {
+	                    // update the cows
+	                    if (h.get(ch) > 0)
+	                        cows++;     
+	                }
+	                // ch character was used
+	                h.put(ch, h.get(ch) - 1); 
+	            }
+	        }
+	                
+	        return Integer.toString(bulls) + "A" + Integer.toString(cows) + "B";
 	}
-
 }
