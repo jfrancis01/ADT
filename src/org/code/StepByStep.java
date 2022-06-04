@@ -18,11 +18,15 @@ public class StepByStep {
 		root.right.left = new TreeNode(6);
 		root.right.right = new TreeNode(4);
 		StepByStep sbs = new StepByStep();
-		sbs.getDirections(root, 3, 6);
+		System.out.println(sbs.getDirections(root, 3, 6));
 		Set<TreeNode> keys = sbs.graph.keySet();
 		for(TreeNode key : keys) {
 			System.out.print(key.val + " ");
-			System.out.print(sbs.graph.get(key));
+			HashMap<TreeNode, String> map = sbs.graph.get(key);
+			Set<TreeNode> nodes = map.keySet();
+			for(TreeNode node : nodes) {
+				System.out.print(node.val);
+			}
 			System.out.println();
 		}
 	}
@@ -56,12 +60,14 @@ public class StepByStep {
 				}
 				visited.add(current);
 				HashMap<TreeNode, String> map = graph.get(current);
-				Set<TreeNode> keys = graph.keySet();
+				Set<TreeNode> keys = map.keySet();
 				for(TreeNode key : keys) {
 					if(!visited.contains(key)) {
+						sb.append(map.get(key));
 						queue.add(key);
 					}
 				}
+				--size;
 			}
 		}
 		return "";
