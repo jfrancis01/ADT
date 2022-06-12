@@ -9,6 +9,7 @@ import java.util.Set;
 public class StepByStep {
 
 	HashMap<TreeNode, HashMap<TreeNode, String>> graph = new HashMap<TreeNode, HashMap<TreeNode, String>>();
+	String answer = null;
 
 	public static void main(String argv[]) {
 		TreeNode root = new TreeNode (5);
@@ -43,7 +44,32 @@ public class StepByStep {
 				break;
 			}
 		}
-		return bfs(start, destValue);
+		HashSet<TreeNode> visited = new HashSet<TreeNode>();
+		StringBuilder sb = new StringBuilder("");
+		dfs(start, destValue, visited, sb);
+		return answer;
+		//return bfs(start, destValue);
+	}
+	
+	public void dfs(TreeNode start, int destValue, HashSet<TreeNode> visited, StringBuilder sb) {
+		if(start.val == destValue) {
+			answer = sb.toString();
+			return;
+		}
+		HashMap<TreeNode, String> children = graph.get(start);
+		Set<TreeNode> keys = children.keySet();
+		for(TreeNode key : keys) {
+			if(!visited.contains(key)) {
+				visited.add(key);
+				sb.append(children.get(key));
+				dfs(key, destValue, visited, sb);
+				sb.deleteCharAt(sb.length() - 1);
+				visited.remove(key);
+			}
+			else {
+				continue;
+			}
+		}
 	}
 	
 	public String bfs(TreeNode root, int destValue) {
