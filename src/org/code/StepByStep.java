@@ -10,6 +10,7 @@ public class StepByStep {
 
 	HashMap<TreeNode, HashMap<TreeNode, String>> graph = new HashMap<TreeNode, HashMap<TreeNode, String>>();
 	String answer = null;
+	int count = Integer.MAX_VALUE;
 
 	public static void main(String argv[]) {
 		TreeNode root = new TreeNode (5);
@@ -46,14 +47,17 @@ public class StepByStep {
 		}
 		HashSet<TreeNode> visited = new HashSet<TreeNode>();
 		StringBuilder sb = new StringBuilder("");
-		dfs(start, destValue, visited, sb);
+		dfs(start, destValue, visited, 0, sb);
 		return answer;
 		//return bfs(start, destValue);
 	}
 	
-	public void dfs(TreeNode start, int destValue, HashSet<TreeNode> visited, StringBuilder sb) {
+	public void dfs(TreeNode start, int destValue, HashSet<TreeNode> visited, int count, StringBuilder sb) {
 		if(start.val == destValue) {
-			answer = sb.toString();
+			if(count < this.count) {
+				this.count = count;
+				answer = sb.toString();
+			}
 			return;
 		}
 		HashMap<TreeNode, String> children = graph.get(start);
@@ -62,7 +66,7 @@ public class StepByStep {
 			if(!visited.contains(key)) {
 				visited.add(key);
 				sb.append(children.get(key));
-				dfs(key, destValue, visited, sb);
+				dfs(key, destValue, visited, count + 1, sb);
 				sb.deleteCharAt(sb.length() - 1);
 				visited.remove(key);
 			}
