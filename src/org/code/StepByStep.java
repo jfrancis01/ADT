@@ -25,7 +25,7 @@ public class StepByStep {
 			HashMap<TreeNode, String> map = sbs.graph.get(key);
 			Set<TreeNode> nodes = map.keySet();
 			for(TreeNode node : nodes) {
-				System.out.print(node.val);
+				System.out.print(node.val + map.get(node) + " ");
 			}
 			System.out.println();
 		}
