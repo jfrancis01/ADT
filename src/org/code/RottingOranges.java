@@ -30,6 +30,7 @@ public class RottingOranges {
 				}
 			}
 		}
+		//these are the edge cases
 		if (grid.length == 1 && grid[0].length == 1) {
 			if (grid[0][0] == 1)
 				return -1;
