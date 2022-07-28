@@ -5,12 +5,13 @@ import java.util.HashSet;
 import java.util.PriorityQueue;
 
 public class MinCostToConnect {
-	
+
 	public int cost = 0;
+
 	class Point {
 		int node;
 		int dist;
-		
+
 		public Point(int node, int dist) {
 			this.node = node;
 			this.dist = dist;
@@ -40,25 +41,29 @@ public class MinCostToConnect {
 		}
 		while(!(visited.size()== n)) {///run the loop till we have visited all the nodes
 			Point p = pq.poll();
-			visited.add(p.node); // add it to the visited
-			//now find out all its neighbours who have not been visited
-			for(int i = 0; i < n; i++) {
-				if(points[p.node][i] == 1 && !visited.contains(i)) {
-					int dist = getDistance(points[p.node][0], points[p.node][1], points[i][0], i);
-					pq.offer(new Point(i, dist));
-					cost+= dist;
+			if(visited.add(p.node)== false){
+				continue;// add it to the visited
+			}
+			else {
+				cost+= p.dist;
+				//now find out all its neighbours who have not been visited
+				for(int i = 0; i < n; i++) {
+					if(i != p.node && adjMat[p.node][i] == 1 && visited.contains(i) == false) {
+						int dist = getDistance(points[p.node][0], points[p.node][1], points[i][0], points[i][1]);
+						pq.offer(new Point(i, dist));
+					}
 				}
 			}
 		}
 		return cost;
 	}
-	
+
 	public int getDistance(int x1, int y1, int x2, int y2) {
-		return Math.abs((x2 - x1) + (y2 - y1));
+		return Math.abs(x1 - x2) + Math.abs(y1 - y2);
 	}
 
 	public static void main(String[] args) {
-		int[][]points = {{0,0},{2,2},{3,10},{5,2},{7,0}};
+		int[][] points = { { 0, 0 }, { 2, 2 }, { 3, 10 }, { 5, 2 }, { 7, 0 } };
 		MinCostToConnect mst = new MinCostToConnect();
 		System.out.println(mst.minCostConnectPoints(points));
 	}
