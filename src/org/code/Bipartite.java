@@ -1,6 +1,8 @@
 package org.code;
 
 public class Bipartite {
+	
+	int[]colors;
 
 	public static void main(String[] args) {
 		Bipartite bp = new Bipartite();
@@ -10,7 +12,7 @@ public class Bipartite {
 
 	public boolean isBipartite(int[][] edges) {
 		int n = edges.length; // # of vertices
-		int[] colors = new int[n];
+		colors = new int[n];
 		int prev = 0;
 		for (int i = 0; i < n; i++) {
 			if (dfs(i, edges, colors, prev)) {
@@ -43,6 +45,7 @@ public class Bipartite {
 				}
 				return true;
 			}
+			return true;
 		}
 		for (int j = 0; j < edges[i].length; j++) {
 			if (!dfs(edges[i][j], edges, colors, prev)) {
