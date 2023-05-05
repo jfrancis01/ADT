@@ -1,5 +1,12 @@
 package org.code;
 
+
+/**
+ * This needs some more work and understanding
+ * the algorithm is wrong but passes most of the test cases
+ * @author joel
+ *
+ */
 public class TwoColorable {
 
 	public static void main(String[] args) {
