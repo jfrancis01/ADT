@@ -14,6 +14,9 @@ public class Bipartite {
 		int n = edges.length; // # of vertices
 		colors = new int[n];
 		int prev = 0;
+		//the reason we check each node is because if the graph
+		//is disconnected or has more than one component, we need
+		//to make sure all the components are colored
 		for (int i = 0; i < n; i++) {
 			if (dfs(i, edges, colors, prev)) {
 				continue;

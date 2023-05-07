@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Djikstra {
+public class NetworkDelay {
 
 	/**
 	 * Djikstra is single source shortest path to all other nodes. To solve the
@@ -21,7 +21,7 @@ public class Djikstra {
 		int[][] times = { { 2, 1, 1 }, { 2, 3, 1 }, { 3, 4, 1 } };
 		int N = 4;
 		int k = 2;
-		Djikstra d = new Djikstra();
+		NetworkDelay d = new NetworkDelay();
 		int time = d.networkDelayTime(times, N, k);
 		System.out.println(time);
 
