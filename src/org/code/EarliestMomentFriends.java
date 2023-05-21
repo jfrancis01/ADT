@@ -113,13 +113,13 @@ public class EarliestMomentFriends {
 			int rootY = find(y);
 			if(rootX != rootY) {
 				if(rank[rootX] > rank[rootY]) {
-					root[y] = rootX;
+					root[rootY] = rootX;
 				}
 				else if(rank[rootY] > rank[rootX]) {
-					root[x] = rootY;
+					root[rootX] = rootY;
 				}
 				else {
-					root[y] = rootX;
+					root[rootY] = rootX;
 					rank[rootX]++;
 				}
 				components--;
