@@ -4,7 +4,7 @@ public class IncreasingTriplet {
 
 	public static void main(String[] args) {
 		IncreasingTriplet it = new IncreasingTriplet();
-		int[] nums = {1,5,0,4,1,3};
+		int[] nums = { 1, 5, 0, 4, 1, 3 };
 		System.out.println(it.increasingTriplet(nums));
 	}
 
@@ -19,18 +19,20 @@ public class IncreasingTriplet {
 		if (index >= n) {
 			if (count < 3) {
 				return false;
-			}
-			if(count >= 3)
-			return true;
-		}
-		if (nums[index] > prev) {
-			// consider it part of the sequence
-			boolean with = helper(nums, n, nums[index], index + 1, count + 1);
-			// don't consider it part of the seqeucne
-			boolean without = helper(nums, n, prev, index + 1, count);
-			if (with || without) {
+			} else if (count == 3) {
 				return true;
 			}
+			return false;
+		} else if (count == 3) {
+			return true;
+		} else if (count > 3) {
+			return false;
+		}
+		if (nums[index] > prev) {
+			if (helper(nums, n, nums[index], index + 1, count + 1) || helper(nums, n, prev, index + 1, count)) {
+				return true;
+			}
+			return false;
 		}
 		return helper(nums, n, prev, index + 1, count);
 	}
