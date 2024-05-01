@@ -31,9 +31,12 @@ public class DecodeString2 {
                 stack.pop(); //pop the opening bracket
                 //get the numbers;
                 int n = Integer.parseInt(stack.pop());
-                for(i  = 1; < n; i++>)
+                for(i  = 1; i< n; i++) {
+                	
+                }
             }
         }
+        return null;
     }
 
 }
