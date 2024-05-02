@@ -7,7 +7,7 @@ public class RottingOranges2 {
 
 	public static void main(String[] args) {
 		RottingOranges2 ro2 = new RottingOranges2();
-		int[][] grid = { { 2, 1, 1 }, { 1, 1, 1 }, { 0, 1, 2 } };
+		int[][] grid = { { 2, 1, 1 }, { 1, 1, 0 }, { 0, 1, 1 } };
 		System.out.println(ro2.orangesRotting(grid));
 	}
 
@@ -42,7 +42,7 @@ public class RottingOranges2 {
 					int[] dir = dirs[j];
 					int nrow = index[0] + dir[0];
 					int ncol = index[1] + dir[1];
-					if (nrow > 0 && ncol > 0 && nrow < rows && ncol < cols) {
+					if (nrow >= 0 && ncol >= 0 && nrow < rows && ncol < cols) {
 						if (grid[nrow][ncol] == 1) {
 							// change it to a rotting orange and dd it to the queue
 							grid[nrow][ncol] = 2;
@@ -55,7 +55,7 @@ public class RottingOranges2 {
 			mins++;
 
 		}
-		return mins == 0 ? -1 : mins;
+		return good == 0 ? mins : -1;
 	}
 
 }
