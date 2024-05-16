@@ -57,9 +57,9 @@ public class EvaluateDivision {
 		createAdjacencyList(equations, values);
 		double[] ans = new double[queries.size()];
 		int index = 0;
-		for(List<String> eq : equations) {
-			String x = eq.get(0);
-			String y = eq.get(1);
+		for(List<String> query : queries) {
+			String x = query.get(0);
+			String y = query.get(1);
 			if(!map.containsKey(x)||!map.containsKey(y)) {
 				ans[index] = -1;
 			}
@@ -83,7 +83,7 @@ public class EvaluateDivision {
 			for(int i  = 0; i < size; i++) {
 				String node = queue.poll();
 				HashMap<String, Double> children = map.get(node);
-				if(map.containsKey(y)) {
+				if(children.containsKey(y)) {
 					ans*=children.get(y);
 					return ans;
 				}
