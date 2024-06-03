@@ -28,7 +28,7 @@ public class MinHeap {
 	 * @return
 	 */
 	public int size() {
-		return currSize;
+		return currSize + 1;
 	}
 	
 	/**
@@ -37,7 +37,10 @@ public class MinHeap {
 	 * @return
 	 */
 	public void insert(int val) {
-		if(currSize + 1 >= arr.length) System.out.println("Heap is full");
+		if(currSize + 1 >= arr.length) {
+			System.out.println("Heap is full");
+			return;
+		}
 		arr[++currIndex] = val;
 		++currSize;
 		siftUp(currIndex, val);
@@ -63,6 +66,13 @@ public class MinHeap {
 			throw new NoSuchElementException();
 		}
 		return del;
+	}
+	
+	public int peek() {
+		if(size() > 0) {
+			return arr[0];
+		}
+		return -1;
 	}
 	
 	private void siftDown(int index) {

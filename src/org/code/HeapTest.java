@@ -64,17 +64,30 @@ public class HeapTest {
     public static void main(String argv[]){
     	MinHeap mh = new MinHeap(6);
     	mh.insert(50);
+    	System.out.println("Size: " + mh.size());
     	mh.insert(30);
+    	System.out.println("Size: " + mh.size());
     	mh.insert(20);
+    	System.out.println("Size: " + mh.size());
     	mh.insert(8);
+    	System.out.println("Size: " + mh.size());
     	mh.insert(15);
+    	System.out.println("Size: " + mh.size());
     	mh.insert(1);
+    	System.out.println("Size: " + mh.size());
     	mh.insert(90);
     	System.out.println("Deleted: " +  mh.delete());
+    	mh.insert(90);
     	System.out.println("Deleted: " +  mh.delete());
+    	System.out.println("Size: " + mh.size());
     	System.out.println("Deleted: " +  mh.delete());
+    	System.out.println("Size: " + mh.size());
     	System.out.println("Deleted: " +  mh.delete());
+    	System.out.println("Size: " + mh.size());
     	System.out.println("Deleted: " +  mh.delete());
+    	System.out.println("Size: " + mh.size());
     	System.out.println("Deleted: " +  mh.delete());
+    	System.out.println("Size: " + mh.size());
+    	System.out.println("Peek: " + mh.peek());
     }
 }
