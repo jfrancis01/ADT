@@ -36,12 +36,12 @@ public class MinHeap {
 	 * @param val
 	 * @return
 	 */
-	public boolean insert(int val) {
-		if(currSize + 1 >= arr.length) return false;
+	public void insert(int val) {
+		if(currSize + 1 >= arr.length) System.out.println("Heap is full");
 		arr[++currIndex] = val;
 		++currSize;
 		siftUp(currIndex, val);
-		return true;
+		System.out.println(val + " inserted");
 	}
 	
 	/**

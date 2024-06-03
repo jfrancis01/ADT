@@ -69,6 +69,7 @@ public class HeapTest {
     	mh.insert(8);
     	mh.insert(15);
     	mh.insert(1);
+    	mh.insert(90);
     	System.out.println("Deleted: " +  mh.delete());
     	System.out.println("Deleted: " +  mh.delete());
     	System.out.println("Deleted: " +  mh.delete());
