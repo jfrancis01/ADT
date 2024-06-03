@@ -62,24 +62,18 @@ add(12);
 
 public class HeapTest {
     public static void main(String argv[]){
-        PriorityQueue<Integer> pQueue = new PriorityQueue<>(new Comparator<Integer>() {
-            @Override
-            public int compare(Integer o1, Integer o2) {
-                return - Integer.compare(o1, o2);
-            }
-        });
-        pQueue.add(10);
-        pQueue.add(20);
-        pQueue.add(15);
-        pQueue.add(21);
-        // Printing the top element of PriorityQueue
-        System.out.println(pQueue.peek());
-
-        // Printing the top element and removing it
-        // from the PriorityQueue container
-        System.out.println(pQueue.poll());
-
-        // Printing the top element again
-        System.out.println(pQueue.peek());
+    	MinHeap mh = new MinHeap(6);
+    	mh.insert(50);
+    	mh.insert(30);
+    	mh.insert(20);
+    	mh.insert(8);
+    	mh.insert(15);
+    	mh.insert(1);
+    	System.out.println("Deleted: " +  mh.delete());
+    	System.out.println("Deleted: " +  mh.delete());
+    	System.out.println("Deleted: " +  mh.delete());
+    	System.out.println("Deleted: " +  mh.delete());
+    	System.out.println("Deleted: " +  mh.delete());
+    	System.out.println("Deleted: " +  mh.delete());
     }
 }
