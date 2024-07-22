@@ -1,5 +1,6 @@
 package org.code;
 
+
 public class MCOnesIII {
 
 	public static void main(String[] args) {
