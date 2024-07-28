@@ -4,7 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Trie {
-	
+	/**
+	 * TrieNode data structure
+	 */
 	class TrieNode {
 		Map<Character, TrieNode> children;
 		boolean end = false;
@@ -15,25 +17,22 @@ public class Trie {
 	public Trie() {
 		root = new TrieNode();
 		root.children = new HashMap<Character, TrieNode>();
+		root.end = false;
 	}
 
 	public void insert(String word) {
 
 		for(int i  = 0; i < word.length(); i++) {
-			boolean last =  i == word.length()-1? true:false;
+			boolean last = i == word.length()-1? true:false;
 			insertHelper(word.charAt(i), root, last);
 		}
 	}
 	
 	private void insertHelper(Character c , TrieNode node, boolean last) {
-		if (node.children.isEmpty() || !node.children.containsKey(c)) {
-			TrieNode newNode = new TrieNode();
-			node.children.put(c, newNode);
-			node.end = last;
+		if(node.end == false) {
+			return;
 		}
-		else {
-			
-		}
+		
 	}
 	public boolean search(String word) {
 		return false;
@@ -44,7 +43,8 @@ public class Trie {
 	}
 
 	public static void main(String[] args) {
-
+		Trie trie = new Trie();
+		trie.insert("abc");
 	}
 
 }
