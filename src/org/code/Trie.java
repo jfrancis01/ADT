@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class Trie {
 	/**
-	 * TrieNode data structure
+	 * TrieNode data structure inner class
 	 */
 	class TrieNode {
 		Map<Character, TrieNode> children;
