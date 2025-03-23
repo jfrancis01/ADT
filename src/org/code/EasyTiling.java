@@ -1,16 +1,23 @@
 package org.code;
 
+import java.time.Duration;
+import java.time.Instant;
+
 public class EasyTiling {
 	
 	//How many ways can you tile a board 1 x 5 board with either 1 x1 
 	// or 1 x 2 tiles.
 	
-	static int ways = 0;
+	static long ways = 0L;
 	public static void main(String[] args) {
-		int n = 20;
+		int n = 46;
 		int[][] board = new int[1][n];
+		Instant start = Instant.now();
 		tile(board);
-		System.out.println("The number of ways to tile a 1 x 5 board is: " + ways);
+		System.out.println("The number of ways to tile a 1 x " + n + " board is: " + ways);
+		Instant finish = Instant.now();
+		long timeElapsed = Duration.between(start, finish).toSeconds();
+		System.out.println("Time: " + timeElapsed);
 	}
 	
 	public static void tile(int[][] board) {
